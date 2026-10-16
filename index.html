@@ -551,19 +551,10 @@
   <script>
     'use strict';
 
-    /* =====================================================================
-       1. SETTINGS
-       Paste the "Web app URL" you get after deploying Code.gs.
-       (The admin username and password are now kept safely inside Code.gs.)
-       ===================================================================== */
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwrDkD4ZQV66Ba-YFNunVJH_qto8YsSnNIYp0uloiq_UKk9dQ2VRBP3uj6b7ZU3OczM/exec';
 
-    /* =====================================================================
-       2. TALKING TO THE BACKEND (Code.gs on Google Apps Script)
-       Every call sends JSON like { action: 'getAllWorkers', token: '...' }.
-       We send it as plain text so the browser does not need a CORS "preflight".
-       ===================================================================== */
-    let adminToken = '';   // given by the server after a successful login
+    
+    let adminToken = '';   
 
     async function api(action, payload) {
       if (!WEB_APP_URL || WEB_APP_URL.indexOf('PASTE_') === 0) {
@@ -592,9 +583,7 @@
       return result;
     }
 
-    /* =====================================================================
-       3. "BACKEND" FUNCTIONS (same names as before, now they call Code.gs)
-       ===================================================================== */
+    //git
     async function submitWorker(record) {
       const result = await api('submitWorker', { record: record });
       return { success: true, id: result.id };
