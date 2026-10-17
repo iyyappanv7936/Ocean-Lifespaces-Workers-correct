@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -12,154 +13,827 @@
   <style>
     /* ---------- Colours and basic setup ---------- */
     :root {
-      --blue:#1f4e78; --navy:#0c0569; --pale:#ccddf1; --green:#198754;
-      --red:#dc3545; --purple:#6f2ce0; --muted:#64748b; --line:#dce3eb;
-      --bg:#f1f4f8; --shadow:0 8px 28px #152a4412;
+      --blue: #1f4e78;
+      --navy: #0c0569;
+      --pale: #ccddf1;
+      --green: #198754;
+      --red: #dc3545;
+      --purple: #6f2ce0;
+      --muted: #64748b;
+      --line: #dce3eb;
+      --bg: #f1f4f8;
+      --shadow: 0 8px 28px #152a4412;
     }
-    * { box-sizing:border-box }
-    html { scroll-behavior:smooth }
-    body { margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:#222; line-height:1.45 }
-    body.admin-mode { overflow:hidden }
-    button,input,select,textarea { font:inherit }
-    button { padding:11px 15px; border:0; border-radius:7px; cursor:pointer; font-weight:700; transition:filter .15s,transform .15s }
-    button:hover:not(:disabled) { filter:brightness(.95) }
-    button:active:not(:disabled) { transform:translateY(1px) }
-    button:disabled { opacity:.58; cursor:wait }
-    input,select,textarea { width:100%; padding:12px; border:1px solid #c8d1dc; border-radius:7px; background:#fff; color:#17202a; outline:none }
-    input:focus,select:focus,textarea:focus { border-color:#4c8bc3; box-shadow:0 0 0 3px #1f4e7818 }
-    textarea { min-height:90px; resize:vertical }
-    label { display:block; font-weight:700; margin-bottom:7px }
-    .required { color:#c62828 }
-    .hint,.muted { color:var(--muted); font-size:12px }
-    .hidden { display:none!important }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: #222;
+      line-height: 1.45
+    }
+
+    body.admin-mode {
+      overflow: hidden
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit
+    }
+
+    button {
+      padding: 11px 15px;
+      border: 0;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: filter .15s, transform .15s
+    }
+
+    button:hover:not(:disabled) {
+      filter: brightness(.95)
+    }
+
+    button:active:not(:disabled) {
+      transform: translateY(1px)
+    }
+
+    button:disabled {
+      opacity: .58;
+      cursor: wait
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #c8d1dc;
+      border-radius: 7px;
+      background: #fff;
+      color: #17202a;
+      outline: none
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #4c8bc3;
+      box-shadow: 0 0 0 3px #1f4e7818
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 7px
+    }
+
+    .required {
+      color: #c62828
+    }
+
+    .hint,
+    .muted {
+      color: var(--muted);
+      font-size: 12px
+    }
+
+    .hidden {
+      display: none !important
+    }
 
     /* ---------- Header and form card ---------- */
-    .header { background:var(--pale); padding:16px; margin:10px; color:var(--navy); display:flex; align-items:center; gap:20px; min-height:100px; border-radius:10px }
-    .header img { max-width:110px; max-height:85px; object-fit:contain }
-    .head { text-align:center; flex:1 }
-    .header h1 { font-size:clamp(20px,3vw,28px); margin:0 0 8px }
-    .header h3 { margin:0; font-size:18px }
-    .container { width:95%; max-width:900px; margin:28px auto }
-    .card { background:#fff; padding:28px; border-radius:12px; box-shadow:var(--shadow) }
-    .section-title { text-align:center; font-size:13px; color:#656de0; font-weight:bold; border-bottom:2px solid #eee; padding-bottom:14px; margin-bottom:22px }
-    .form-group { margin-bottom:18px }
-    .security { text-align:center; position:relative; margin-bottom:24px; min-height:65px }
-    .security img { max-width:250px; max-height:120px; object-fit:contain }
-    .admin-link { position:absolute; left:0; top:0 }
+    .header {
+      background: var(--pale);
+      padding: 16px;
+      margin: 10px;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      min-height: 100px;
+      border-radius: 10px
+    }
+
+    .header img {
+      max-width: 110px;
+      max-height: 85px;
+      object-fit: contain
+    }
+
+    .head {
+      text-align: center;
+      flex: 1
+    }
+
+    .header h1 {
+      font-size: clamp(20px, 3vw, 28px);
+      margin: 0 0 8px
+    }
+
+    .header h3 {
+      margin: 0;
+      font-size: 18px
+    }
+
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 28px auto
+    }
+
+    .card {
+      background: #fff;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: var(--shadow)
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 13px;
+      color: #656de0;
+      font-weight: bold;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 14px;
+      margin-bottom: 22px
+    }
+
+    .form-group {
+      margin-bottom: 18px
+    }
+
+    .security {
+      text-align: center;
+      position: relative;
+      margin-bottom: 24px;
+      min-height: 65px
+    }
+
+    .security img {
+      max-width: 250px;
+      max-height: 120px;
+      object-fit: contain
+    }
+
+    .admin-link {
+      position: absolute;
+      left: 0;
+      top: 0
+    }
 
     /* ---------- Buttons ---------- */
-    .primary,.camera-btn,.admin-link button { background:var(--blue); color:#fff }
-    .success-btn,.file-btn,.export-btn,.capture-btn { background:var(--green); color:#fff }
-    .clear-btn,.admin-login-cancel,.secondary { background:#e5e7eb; color:#202938 }
-    .danger,.logout-btn,.close-camera-btn,.delete-btn { background:var(--red); color:#fff }
-    .purple { background:var(--purple); color:#fff }
-    .buttons,.camera-buttons,.camera-actions,.admin-login-buttons,.toolbar,.filter-row,.pagination,.modal-actions { display:flex; gap:10px; flex-wrap:wrap; align-items:center }
-    .submit-btn { flex:1 }
-    .small-btn { padding:7px 10px; font-size:12px }
+    .primary,
+    .camera-btn,
+    .admin-link button {
+      background: var(--blue);
+      color: #fff
+    }
+
+    .success-btn,
+    .file-btn,
+    .export-btn,
+    .capture-btn {
+      background: var(--green);
+      color: #fff
+    }
+
+    .clear-btn,
+    .admin-login-cancel,
+    .secondary {
+      background: #e5e7eb;
+      color: #202938
+    }
+
+    .danger,
+    .logout-btn,
+    .close-camera-btn,
+    .delete-btn {
+      background: var(--red);
+      color: #fff
+    }
+
+    .purple {
+      background: var(--purple);
+      color: #fff
+    }
+
+    .buttons,
+    .camera-buttons,
+    .camera-actions,
+    .admin-login-buttons,
+    .toolbar,
+    .filter-row,
+    .pagination,
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    .submit-btn {
+      flex: 1
+    }
+
+    .small-btn {
+      padding: 7px 10px;
+      font-size: 12px
+    }
 
     /* ---------- Image previews, messages ---------- */
-    .image-preview { margin-top:12px; display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap }
-    .image-preview img { width:160px; height:140px; object-fit:contain; border:1px solid #ddd; border-radius:7px; background:#fafafa; cursor:zoom-in }
-    .message { display:none; padding:13px; margin-top:18px; border-radius:7px; text-align:center }
-    .message.success { display:block; background:#d4edda; color:#155724 }
-    .message.error { display:block; background:#fdecec; color:#b42318 }
-    .login-card { max-width:450px; margin:35px auto }
-    .login-card h2 { color:var(--blue) }
-    .login-error { display:none; color:#b42318; background:#fdecec; padding:10px; border-radius:6px; margin-bottom:14px }
-    .file-input { display:none }
-    .field-hint { font-size:12px; color:#667085; margin-top:5px }
-    .company-footer { text-align:center; margin-top:20px }
-    .company-footer img { max-width:880px; max-height:100px; object-fit:contain }
-    .privacy-note { font-size:12px; color:#687385; background:#f8fafc; border:1px solid #e2e8f0; border-radius:7px; padding:10px; margin-bottom:16px }
-    .badge { display:inline-block; border-radius:999px; padding:3px 8px; font-size:11px; font-weight:700; background:#e9f2fa; color:var(--blue) }
+    .image-preview {
+      margin-top: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .image-preview img {
+      width: 160px;
+      height: 140px;
+      object-fit: contain;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      background: #fafafa;
+      cursor: zoom-in
+    }
+
+    .message {
+      display: none;
+      padding: 13px;
+      margin-top: 18px;
+      border-radius: 7px;
+      text-align: center
+    }
+
+    .message.success {
+      display: block;
+      background: #d4edda;
+      color: #155724
+    }
+
+    .message.error {
+      display: block;
+      background: #fdecec;
+      color: #b42318
+    }
+
+    .login-card {
+      max-width: 450px;
+      margin: 35px auto
+    }
+
+    .login-card h2 {
+      color: var(--blue)
+    }
+
+    .login-error {
+      display: none;
+      color: #b42318;
+      background: #fdecec;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 14px
+    }
+
+    .file-input {
+      display: none
+    }
+
+    .field-hint {
+      font-size: 12px;
+      color: #667085;
+      margin-top: 5px
+    }
+
+    .company-footer {
+      text-align: center;
+      margin-top: 20px
+    }
+
+    .company-footer img {
+      max-width: 880px;
+      max-height: 100px;
+      object-fit: contain
+    }
+
+    .privacy-note {
+      font-size: 12px;
+      color: #687385;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      padding: 10px;
+      margin-bottom: 16px
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #e9f2fa;
+      color: var(--blue)
+    }
 
     /* ---------- Admin panel ---------- */
-    #adminPanel { display:none; position:fixed; inset:0; padding:18px; overflow:auto; background:#f5f7fa; z-index:9999 }
-    .admin-header { display:flex; justify-content:space-between; align-items:center; gap:12px; position:sticky; top:-18px; background:#fff; padding:12px 0; border-bottom:1px solid #ddd; z-index:10 }
-    .admin-header h2 { color:var(--blue); margin:0 }
-    .admin-title { display:flex; gap:10px; align-items:center }
-    .admin-content { max-width:1800px; margin:0 auto }
-    .dashboard-grid { display:grid; grid-template-columns:repeat(4,minmax(150px,1fr)); gap:14px; margin:18px 0 }
-    .stat-card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px; box-shadow:0 2px 10px #00000006 }
-    .stat-label { color:var(--muted); font-size:13px }
-    .stat-value { font-size:28px; font-weight:800; color:var(--blue); margin-top:5px }
-    .dashboard-lists { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-bottom:18px }
-    .mini-card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:14px }
-    .mini-card h3 { margin:0 0 10px; font-size:15px; color:var(--blue) }
-    .mini-list { display:flex; flex-direction:column; gap:6px; max-height:130px; overflow:auto }
-    .mini-list div { display:flex; justify-content:space-between; gap:8px; font-size:13px; border-bottom:1px solid #f0f2f5; padding-bottom:4px }
-    .admin-tools { background:#fff; border:1px solid var(--line); padding:14px; border-radius:10px; margin:15px 0 }
-    .filter-row > * { flex:1; min-width:150px }
-    .filter-row .search-field { flex:2; min-width:230px }
-    .toolbar { justify-content:space-between; margin-bottom:12px }
-    .toolbar-left,.toolbar-right { display:flex; gap:8px; flex-wrap:wrap; align-items:center }
-    .table-container { overflow:auto; max-height:calc(100vh - 440px); min-height:220px; border:1px solid #d5dce5; background:#fff; border-radius:9px; margin-top:12px }
-    table { width:100%; border-collapse:collapse; min-width:1550px }
-    th,td { padding:9px; border:1px solid #e1e6ed; text-align:left; vertical-align:middle; white-space:nowrap; font-size:13px }
-    th { background:var(--blue); color:#fff; position:sticky; top:0; z-index:2 }
-    tbody tr:nth-child(even) { background:#f8fafc }
-    tbody tr:hover { background:#edf5fc }
-    .worker-image { width:82px; height:75px; object-fit:contain; border:1px solid #ddd; border-radius:5px; cursor:zoom-in; background:#fff }
-    .row-actions { display:flex; gap:5px }
-    .row-actions button { padding:7px 9px; font-size:12px }
-    .no-data { text-align:center; padding:24px; color:#777 }
-    .pagination { justify-content:space-between; padding:12px; background:#fff; border:1px solid var(--line); border-top:0; border-radius:0 0 9px 9px }
-    .pagination .page-controls { display:flex; gap:6px; align-items:center }
-    .page-size { width:90px; padding:8px }
+    #adminPanel {
+      display: none;
+      position: fixed;
+      inset: 0;
+      padding: 18px;
+      overflow: auto;
+      background: #f5f7fa;
+      z-index: 9999
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: -18px;
+      background: #fff;
+      padding: 12px 0;
+      border-bottom: 1px solid #ddd;
+      z-index: 10
+    }
+
+    .admin-header h2 {
+      color: var(--blue);
+      margin: 0
+    }
+
+    .admin-title {
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    .admin-content {
+      max-width: 1800px;
+      margin: 0 auto
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 14px;
+      margin: 18px 0
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 2px 10px #00000006
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--blue);
+      margin-top: 5px
+    }
+
+    .dashboard-lists {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px
+    }
+
+    .mini-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px
+    }
+
+    .mini-card h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: var(--blue)
+    }
+
+    .mini-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 130px;
+      overflow: auto
+    }
+
+    .mini-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 13px;
+      border-bottom: 1px solid #f0f2f5;
+      padding-bottom: 4px
+    }
+
+    .admin-tools {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 14px;
+      border-radius: 10px;
+      margin: 15px 0
+    }
+
+    .filter-row>* {
+      flex: 1;
+      min-width: 150px
+    }
+
+    .filter-row .search-field {
+      flex: 2;
+      min-width: 230px
+    }
+
+    .toolbar {
+      justify-content: space-between;
+      margin-bottom: 12px
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    .table-container {
+      overflow: auto;
+      max-height: calc(100vh - 440px);
+      min-height: 220px;
+      border: 1px solid #d5dce5;
+      background: #fff;
+      border-radius: 9px;
+      margin-top: 12px
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1550px
+    }
+
+    th,
+    td {
+      padding: 9px;
+      border: 1px solid #e1e6ed;
+      text-align: left;
+      vertical-align: middle;
+      white-space: nowrap;
+      font-size: 13px
+    }
+
+    th {
+      background: var(--blue);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 2
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f8fafc
+    }
+
+    tbody tr:hover {
+      background: #edf5fc
+    }
+
+    .worker-image {
+      width: 82px;
+      height: 75px;
+      object-fit: contain;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: zoom-in;
+      background: #fff
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 5px
+    }
+
+    .row-actions button {
+      padding: 7px 9px;
+      font-size: 12px
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 24px;
+      color: #777
+    }
+
+    .pagination {
+      justify-content: space-between;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 0;
+      border-radius: 0 0 9px 9px
+    }
+
+    .pagination .page-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center
+    }
+
+    .page-size {
+      width: 90px;
+      padding: 8px
+    }
 
     /* ---------- Pop-ups (camera, image viewer, edit) ---------- */
-    .camera-modal,.image-viewer,.edit-modal { display:none; position:fixed; inset:0; z-index:10000; background:#000d; justify-content:center; align-items:center; padding:15px }
-    .camera-box,.edit-box { background:#fff; width:95%; max-width:620px; padding:18px; border-radius:12px; max-height:92vh; overflow:auto }
-    .camera-box { text-align:center }
-    .camera-box video { width:100%; max-height:65vh; background:#111; border-radius:8px }
-    .image-viewer { z-index:20000 }
-    .image-viewer img { max-width:95%; max-height:90%; object-fit:contain }
-    .close-viewer { position:absolute; top:12px; right:24px; color:#fff; font-size:38px; cursor:pointer }
-    .edit-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px }
-    .edit-box h2 { color:var(--blue); margin-top:0 }
-    .edit-box .form-group { margin-bottom:12px }
-    .edit-images { display:grid; grid-template-columns:repeat(3,1fr); gap:10px }
-    .edit-image-card { border:1px solid var(--line); border-radius:8px; padding:8px }
-    .edit-image-card img { width:100%; height:100px; object-fit:contain }
-    .toast-region { position:fixed; right:15px; bottom:15px; z-index:30000; display:flex; flex-direction:column; gap:8px; max-width:min(400px,90vw) }
-    .toast { padding:12px 15px; background:#17202a; color:#fff; border-radius:8px; box-shadow:var(--shadow) }
-    .toast.error { background:#a61b1b }
-    .toast.success { background:#17663a }
+    .camera-modal,
+    .image-viewer,
+    .edit-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: #000d;
+      justify-content: center;
+      align-items: center;
+      padding: 15px
+    }
+
+    .camera-box,
+    .edit-box {
+      background: #fff;
+      width: 95%;
+      max-width: 620px;
+      padding: 18px;
+      border-radius: 12px;
+      max-height: 92vh;
+      overflow: auto
+    }
+
+    .camera-box {
+      text-align: center
+    }
+
+    .camera-box video {
+      width: 100%;
+      max-height: 65vh;
+      background: #111;
+      border-radius: 8px
+    }
+
+    .image-viewer {
+      z-index: 20000
+    }
+
+    .image-viewer img {
+      max-width: 95%;
+      max-height: 90%;
+      object-fit: contain
+    }
+
+    .close-viewer {
+      position: absolute;
+      top: 12px;
+      right: 24px;
+      color: #fff;
+      font-size: 38px;
+      cursor: pointer
+    }
+
+    .edit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    .edit-box h2 {
+      color: var(--blue);
+      margin-top: 0
+    }
+
+    .edit-box .form-group {
+      margin-bottom: 12px
+    }
+
+    .edit-images {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px
+    }
+
+    .edit-image-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px
+    }
+
+    .edit-image-card img {
+      width: 100%;
+      height: 100px;
+      object-fit: contain
+    }
+
+    .toast-region {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      z-index: 30000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: min(400px, 90vw)
+    }
+
+    .toast {
+      padding: 12px 15px;
+      background: #17202a;
+      color: #fff;
+      border-radius: 8px;
+      box-shadow: var(--shadow)
+    }
+
+    .toast.error {
+      background: #a61b1b
+    }
+
+    .toast.success {
+      background: #17663a
+    }
 
     /* ---------- Tablet and mobile ---------- */
     @media (max-width:950px) {
-      .dashboard-grid { grid-template-columns:repeat(2,minmax(0,1fr)) }
-      .dashboard-lists { grid-template-columns:1fr 1fr }
-      .table-container { max-height:calc(100vh - 500px) }
+      .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .dashboard-lists {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .table-container {
+        max-height: calc(100vh - 500px)
+      }
     }
+
     @media (max-width:600px) {
-      .header { flex-direction:column; text-align:center; margin:6px; padding:14px }
-      .header img { max-width:90px }
-      .container { width:96%; margin:14px auto }
-      .card { padding:17px }
-      .admin-link { position:static; margin:10px 0 }
-      .security { display:flex; flex-direction:column; align-items:center }
-      .buttons,.camera-buttons { flex-direction:column; align-items:stretch }
-      .camera-buttons button,.buttons button { width:100% }
-      #adminPanel { padding:9px }
-      .admin-header { align-items:stretch; flex-direction:column; top:-9px }
-      .admin-header .camera-actions { display:flex; flex-wrap:wrap }
-      .admin-header button { flex:1 }
-      .dashboard-grid { grid-template-columns:1fr 1fr; gap:8px }
-      .stat-card { padding:12px }
-      .stat-value { font-size:23px }
-      .dashboard-lists { grid-template-columns:1fr }
-      .filter-row { display:grid; grid-template-columns:1fr }
-      .filter-row > * { min-width:0 }
-      .toolbar { align-items:stretch; flex-direction:column }
-      .toolbar-left,.toolbar-right { width:100% }
-      .toolbar button { flex:1 }
-      .table-container { max-height:55vh }
-      .pagination { align-items:flex-start; flex-direction:column }
-      .edit-grid { grid-template-columns:1fr }
-      .edit-images { grid-template-columns:1fr }
-      .edit-box { padding:13px }
-      .row-actions { flex-direction:column }
+      .header {
+        flex-direction: column;
+        text-align: center;
+        margin: 6px;
+        padding: 14px
+      }
+
+      .header img {
+        max-width: 90px
+      }
+
+      .container {
+        width: 96%;
+        margin: 14px auto
+      }
+
+      .card {
+        padding: 17px
+      }
+
+      .admin-link {
+        position: static;
+        margin: 10px 0
+      }
+
+      .security {
+        display: flex;
+        flex-direction: column;
+        align-items: center
+      }
+
+      .buttons,
+      .camera-buttons {
+        flex-direction: column;
+        align-items: stretch
+      }
+
+      .camera-buttons button,
+      .buttons button {
+        width: 100%
+      }
+
+      #adminPanel {
+        padding: 9px
+      }
+
+      .admin-header {
+        align-items: stretch;
+        flex-direction: column;
+        top: -9px
+      }
+
+      .admin-header .camera-actions {
+        display: flex;
+        flex-wrap: wrap
+      }
+
+      .admin-header button {
+        flex: 1
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px
+      }
+
+      .stat-card {
+        padding: 12px
+      }
+
+      .stat-value {
+        font-size: 23px
+      }
+
+      .dashboard-lists {
+        grid-template-columns: 1fr
+      }
+
+      .filter-row {
+        display: grid;
+        grid-template-columns: 1fr
+      }
+
+      .filter-row>* {
+        min-width: 0
+      }
+
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column
+      }
+
+      .toolbar-left,
+      .toolbar-right {
+        width: 100%
+      }
+
+      .toolbar button {
+        flex: 1
+      }
+
+      .table-container {
+        max-height: 55vh
+      }
+
+      .pagination {
+        align-items: flex-start;
+        flex-direction: column
+      }
+
+      .edit-grid {
+        grid-template-columns: 1fr
+      }
+
+      .edit-images {
+        grid-template-columns: 1fr
+      }
+
+      .edit-box {
+        padding: 13px
+      }
+
+      .row-actions {
+        flex-direction: column
+      }
     }
   </style>
 </head>
@@ -180,7 +854,8 @@
     <!-- ================= REGISTRATION FORM ================= -->
     <section class="card" id="formPanel">
       <div class="section-title">
-        The Workers Register Form is used to maintain a detailed and up-to-date record of workers engaged in the organization.
+        The Workers Register Form is used to maintain a detailed and up-to-date record of workers engaged in the
+        organization.
       </div>
       <div class="privacy-note">
         Please verify all details before submitting. Your details and photos are saved securely to the company records.
@@ -214,40 +889,131 @@
 
         <div class="form-group">
           <label for="mobileNumber">Mobile Number <span class="required">*</span></label>
-          <input autocomplete="tel" id="mobileNumber" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="10-digit mobile number" required type="tel" />
+          <input autocomplete="tel" id="mobileNumber" inputmode="numeric" maxlength="10" pattern="[0-9]{10}"
+            placeholder="10-digit mobile number" required type="tel" />
         </div>
 
         <div class="form-group">
           <label for="emergencyContact">Emergency Contact Number <span class="required">*</span></label>
-          <input id="emergencyContact" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="10-digit emergency contact" required type="tel" />
+          <input id="emergencyContact" inputmode="numeric" maxlength="10" pattern="[0-9]{10}"
+            placeholder="10-digit emergency contact" required type="tel" />
         </div>
 
         <div class="form-group">
           <label for="designation">Designation <span class="required">*</span></label>
           <select id="designation" required>
             <option value="">Choose</option>
-            <option>Asst-Project Manager</option>
-            <option>Fire Fighter</option>
-            <option>Gypsum</option>
+            <option>AC Technician</option>
+            <option>Fabricator</option>
+            <option>Assistant Mason</option>
+            <option>Bar Bender</option>
+            <option>Bar Bender-Helper</option>
+            <option>Billing Engineer</option>
+            <option>BMS Technician</option>
+            <option>Bricklayer</option>
+            <option>Cable Pulling Technician</option>
+            <option>Carpenter</option>
+            <option>Carpenter Helper</option>
+            <option>Civil Engineer</option>
+            <option>Civil Supervisor</option>
+            <option>Concrete Mixer Operator</option>
+            <option>Concrete Worker</option>
+            <option>Construction Manager</option>
+            <option>Crane Operator</option>
+            <option>Demolition Worker</option>
+            <option>Document Controller</option>
+            <option>Driver</option>
+            <option>Duct Installer</option>
+            <option>Electrical Engineer</option>
+            <option>Electrical Helper</option>
+            <option>Electrical Supervisor</option>
+            <option>Electrician</option>
+            <option>Electrician Helper</option>
+            <option>ELV Technician</option>
+            <option>Excavator Operator</option>
+            <option>False Ceiling Worker</option>
+            <option>Finishing Helper</option>
+            <option>Fire Alarm Technician</option>
+            <option>Fire Fighting Technician</option>
+            <option>Flooring Installer</option>
+            <option>Flooring Worker</option>
+            <option>Foreman</option>
+            <option>Forklift Operator</option>
+            <option>Furniture Installer</option>
+            <option>General Construction Worker</option>
+            <option>General Foreman</option>
+            <option>General Helper</option>
+            <option>General Labourer</option>
+            <option>Glass Installer</option>
+            <option>Gypsum Board Installer</option>
             <option>Helper</option>
+            <option>Housekeeping Staff</option>
+            <option>Housekeeping Supervisor</option>
+            <option>HVAC Technician</option>
+            <option>Interior Carpenter</option>
+            <option>Interior Supervisor</option>
+            <option>JCB Operator</option>
+            <option>Loading and Unloading Worker</option>
+            <option>Machine Operator</option>
             <option>Mason</option>
-            <option>Plaster</option>
-            <option>POP</option>
+            <option>Mason Helper</option>
+            <option>Material Coordinator</option>
+            <option>Material Handler</option>
+            <option>Mechanical Technician</option>
+            <option>MEP Supervisor</option>
+            <option>Modular Furniture Installer</option>
+            <option>Office Boy</option>
+            <option>Painter</option>
+            <option>Painter Helper</option>
+            <option>Partition Installer</option>
+            <option>Pipe Fitter</option>
+            <option>Planning Engineer</option>
+            <option>Plastering Worker</option>
+            <option>Plumber</option>
+            <option>Plumber Helper</option>
+            <option>Plumbing Helper</option>
+            <option>Plumbing Supervisor</option>
+            <option>Polishing Worker</option>
+            <option>POP Worker</option>
+            <option>Asst-Project Manager</option>
             <option>Project Manager</option>
-            <option>Safety Engineer</option>
-            <option>Safety Manager</option>
+            <option>Pump Operator</option>
+            <option>QA/QC Inspector</option>
+            <option>Quality Engineer</option>
+            <option>Quantity Surveyor</option>
             <option>Safety Officer</option>
-            <option>Security</option>
+            <option>Safety Steward</option>
+            <option>Safety Supervisor</option>
+            <option>Scaffolder</option>
+            <option>Scaffolding Helper</option>
+            <option>Security Guard</option>
+            <option>Security Supervisor</option>
+            <option>Shuttering Carpenter</option>
+            <option>Silicone Applicator</option>
+            <option>Site Administrator</option>
             <option>Site Engineer</option>
-            <option>Supervisor</option>
+            <option>Site In-Charge</option>
+            <option>Site Supervisor</option>
+            <option>Steel Fixer</option>
+            <option>Storekeeper</option>
+            <option>Storekeeper-Helper</option>
+            <option>Surveyor</option>
+            <option>Tile Mason</option>
+            <option>Wallpaper Installer</option>
+            <option>Waterproofing Technician</option>
             <option>Welder</option>
+            <option>Welder Helper</option>
+            <option>Welding Machine Operator</option>
+            <option>Wireman</option>
+            <option>Work Supervisor</option>
             <option>Other's</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="supervisorContact">Supervisor/Manager Contact Number <span class="required">*</span></label>
-          <input id="supervisorContact" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="10-digit supervisor number" required type="tel" />
+          <input id="supervisorContact" inputmode="numeric" maxlength="10" pattern="[0-9]{10}"
+            placeholder="10-digit supervisor number" required type="tel" />
         </div>
 
         <div class="form-group">
@@ -257,12 +1023,14 @@
             <option>Bushra Interiors</option>
             <option>Cholo Ram Jaat furniture</option>
             <option>Dharmendra</option>
-            <option>Excellent Security Force</option>
+            <option>Henry & Farad Pvt.Ltd</option>
+            <option>Johnson controls</option>
             <option>Limra</option>
             <option>Lotus MEP Solution PVT LTD</option>
             <option>MD Contracting</option>
             <option>Pappu Ram</option>
             <option>Rajesh Contact</option>
+            <option>Royalguardian Security</option>
             <option>Sree Vignesh</option>
             <option>Stem Infra Project PVT LTD</option>
             <option>Syncro Industries</option>
@@ -274,10 +1042,13 @@
         <div class="form-group">
           <label for="aadharFrontFile">Aadhar Card Front Side <span class="required">*</span></label>
           <div class="camera-buttons">
-            <button class="camera-btn" onclick="openCamera('aadharFront','environment')" type="button">Take Photo</button>
-            <button class="file-btn" onclick="document.getElementById('aadharFrontFile').click()" type="button">Upload Image </button>
+            <button class="camera-btn" onclick="openCamera('aadharFront','environment')" type="button">Take
+              Photo</button>
+            <button class="file-btn" onclick="document.getElementById('aadharFrontFile').click()" type="button">Upload
+              Image </button>
           </div>
-          <input accept="image/*" class="file-input" id="aadharFrontFile" onchange="selectFile(this,'aadharFront')" type="file" />
+          <input accept="image/*" class="file-input" id="aadharFrontFile" onchange="selectFile(this,'aadharFront')"
+            type="file" />
           <input id="aadharFront" type="hidden" />
           <div class="image-preview" id="aadharFrontPreview"></div>
           <div class="field-hint">Use a clear image with all card details visible.</div>
@@ -287,22 +1058,27 @@
         <div class="form-group">
           <label for="aadharBackFile">Aadhar Card Back Side <span class="required">*</span></label>
           <div class="camera-buttons">
-            <button class="camera-btn" onclick="openCamera('aadharBack','environment')" type="button">Take Photo</button>
-            <button class="file-btn" onclick="document.getElementById('aadharBackFile').click()" type="button">Upload Image </button>
+            <button class="camera-btn" onclick="openCamera('aadharBack','environment')" type="button">Take
+              Photo</button>
+            <button class="file-btn" onclick="document.getElementById('aadharBackFile').click()" type="button">Upload
+              Image </button>
           </div>
-          <input accept="image/*" class="file-input" id="aadharBackFile" onchange="selectFile(this,'aadharBack')" type="file" />
+          <input accept="image/*" class="file-input" id="aadharBackFile" onchange="selectFile(this,'aadharBack')"
+            type="file" />
           <input id="aadharBack" type="hidden" />
           <div class="image-preview" id="aadharBackPreview"></div>
         </div>
 
-    
+
         <div class="form-group">
           <label for="photoUploadFile">My Photo <span class="required">*</span></label>
           <div class="camera-buttons">
             <button class="camera-btn" onclick="openCamera('photoUpload','user')" type="button">Take Photo</button>
-            <button class="file-btn" onclick="document.getElementById('photoUploadFile').click()" type="button">Upload Image </button>
+            <button class="file-btn" onclick="document.getElementById('photoUploadFile').click()" type="button">Upload
+              Image </button>
           </div>
-          <input accept="image/*" class="file-input" id="photoUploadFile" onchange="selectFile(this,'photoUpload')" type="file" />
+          <input accept="image/*" class="file-input" id="photoUploadFile" onchange="selectFile(this,'photoUpload')"
+            type="file" />
           <input id="photoUpload" type="hidden" />
           <div class="image-preview" id="photoUploadPreview"></div>
         </div>
@@ -337,7 +1113,8 @@
           </div>
           <div class="form-group">
             <label for="adminPassword">Password</label>
-            <input autocomplete="current-password" id="adminPassword" placeholder="Enter admin password" required type="password" />
+            <input autocomplete="current-password" id="adminPassword" placeholder="Enter admin password" required
+              type="password" />
           </div>
           <div class="admin-login-buttons">
             <button class="purple admin-login-submit" type="submit">Login</button>
@@ -369,24 +1146,52 @@
       <p class="hint" id="adminStatus" role="status">Loading records…</p>
 
       <div class="dashboard-grid">
-        <div class="stat-card"><div class="stat-label">Total workers</div><div class="stat-value" id="statTotal">0</div></div>
-        <div class="stat-card"><div class="stat-label">Registered today</div><div class="stat-value" id="statToday">0</div></div>
-        <div class="stat-card"><div class="stat-label">Projects represented</div><div class="stat-value" id="statProjects">0</div></div>
-        <div class="stat-card"><div class="stat-label">Contractors represented</div><div class="stat-value" id="statContractors">0</div></div>
+        <div class="stat-card">
+          <div class="stat-label">Total workers</div>
+          <div class="stat-value" id="statTotal">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Registered today</div>
+          <div class="stat-value" id="statToday">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Projects represented</div>
+          <div class="stat-value" id="statProjects">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Contractors represented</div>
+          <div class="stat-value" id="statContractors">0</div>
+        </div>
       </div>
 
       <div class="dashboard-lists">
-        <div class="mini-card"><h3>Workers by project</h3><div class="mini-list" id="projectStats"></div></div>
-        <div class="mini-card"><h3>Workers by designation</h3><div class="mini-list" id="designationStats"></div></div>
-        <div class="mini-card"><h3>Workers by contractor</h3><div class="mini-list" id="contractorStats"></div></div>
+        <div class="mini-card">
+          <h3>Workers by project</h3>
+          <div class="mini-list" id="projectStats"></div>
+        </div>
+        <div class="mini-card">
+          <h3>Workers by designation</h3>
+          <div class="mini-list" id="designationStats"></div>
+        </div>
+        <div class="mini-card">
+          <h3>Workers by contractor</h3>
+          <div class="mini-list" id="contractorStats"></div>
+        </div>
       </div>
 
       <div class="admin-tools">
         <div class="filter-row">
-          <input aria-label="Search worker records" class="search-field" id="searchInput" placeholder="Search name, mobile, ID, project, contractor…" type="search" />
-          <select aria-label="Filter by project" id="projectFilter"><option value="">All projects</option></select>
-          <select aria-label="Filter by designation" id="designationFilter"><option value="">All designations</option></select>
-          <select aria-label="Filter by contractor" id="contractorFilter"><option value="">All contractors</option></select>
+          <input aria-label="Search worker records" class="search-field" id="searchInput"
+            placeholder="Search name, mobile, ID, project, contractor…" type="search" />
+          <select aria-label="Filter by project" id="projectFilter">
+            <option value="">All projects</option>
+          </select>
+          <select aria-label="Filter by designation" id="designationFilter">
+            <option value="">All designations</option>
+          </select>
+          <select aria-label="Filter by contractor" id="contractorFilter">
+            <option value="">All contractors</option>
+          </select>
           <select aria-label="Sort records" id="sortFilter">
             <option value="newest">Newest first</option>
             <option value="oldest">Oldest first</option>
@@ -404,7 +1209,10 @@
             <span class="muted" id="resultCount">0 records</span>
             <label class="muted" for="pageSize">Rows:</label>
             <select aria-label="Rows per page" class="page-size" id="pageSize">
-              <option>10</option><option>25</option><option>50</option><option>100</option>
+              <option>10</option>
+              <option>25</option>
+              <option>50</option>
+              <option>100</option>
             </select>
           </div>
         </div>
@@ -414,13 +1222,26 @@
         <table id="workersTable">
           <thead>
             <tr>
-              <th>Date</th><th>Project</th><th>Worker Name</th><th>DOB</th><th>Mobile</th>
-              <th>Emergency Contact</th><th>Designation</th><th>Supervisor Contact</th><th>Contractor</th>
-              <th>Aadhar Front</th><th>Aadhar Back</th><th>Worker Photo</th><th>Remarks</th><th>Action</th>
+              <th>Date</th>
+              <th>Project</th>
+              <th>Worker Name</th>
+              <th>DOB</th>
+              <th>Mobile</th>
+              <th>Emergency Contact</th>
+              <th>Designation</th>
+              <th>Supervisor Contact</th>
+              <th>Contractor</th>
+              <th>Aadhar Front</th>
+              <th>Aadhar Back</th>
+              <th>Worker Photo</th>
+              <th>Remarks</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody id="dataTable">
-            <tr><td class="no-data" colspan="14">Sign in to load records.</td></tr>
+            <tr>
+              <td class="no-data" colspan="14">Sign in to load records.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -453,7 +1274,8 @@
   </div>
 
   <!-- ================= IMAGE VIEWER ================= -->
-  <div aria-label="Image preview" aria-modal="true" class="image-viewer" id="imageViewer" onclick="closeImageViewer()" role="dialog">
+  <div aria-label="Image preview" aria-modal="true" class="image-viewer" id="imageViewer" onclick="closeImageViewer()"
+    role="dialog">
     <span aria-label="Close image preview" class="close-viewer" role="button">×</span>
     <img alt="Full image preview" id="viewerImage" onclick="event.stopPropagation()" />
   </div>
@@ -491,11 +1313,110 @@
           <div class="form-group">
             <label for="editDesignation">Designation *</label>
             <select id="editDesignation" required>
-              <option>Asst-Project Manager</option><option>Fire Fighter</option><option>Gypsum</option>
-              <option>Helper</option><option>Mason</option><option>Plaster</option><option>POP</option>
-              <option>Project Manager</option><option>Safety Engineer</option><option>Safety Manager</option>
-              <option>Safety Officer</option><option>Security</option><option>Site Engineer</option><option>Supervisor</option>
-              <option>Welder</option><option>Other's</option>
+              <option>AC Technician</option>
+            <option>Fabricator</option>
+            <option>Assistant Mason</option>
+            <option>Bar Bender</option>
+            <option>Bar Bender-Helper</option>
+            <option>Billing Engineer</option>
+            <option>BMS Technician</option>
+            <option>Bricklayer</option>
+            <option>Cable Pulling Technician</option>
+            <option>Carpenter</option>
+            <option>Carpenter Helper</option>
+            <option>Civil Engineer</option>
+            <option>Civil Supervisor</option>
+            <option>Concrete Mixer Operator</option>
+            <option>Concrete Worker</option>
+            <option>Construction Manager</option>
+            <option>Crane Operator</option>
+            <option>Demolition Worker</option>
+            <option>Document Controller</option>
+            <option>Driver</option>
+            <option>Duct Installer</option>
+            <option>Electrical Engineer</option>
+            <option>Electrical Helper</option>
+            <option>Electrical Supervisor</option>
+            <option>Electrician</option>
+            <option>Electrician Helper</option>
+            <option>ELV Technician</option>
+            <option>Excavator Operator</option>
+            <option>False Ceiling Worker</option>
+            <option>Finishing Helper</option>
+            <option>Fire Alarm Technician</option>
+            <option>Fire Fighting Technician</option>
+            <option>Flooring Installer</option>
+            <option>Flooring Worker</option>
+            <option>Foreman</option>
+            <option>Forklift Operator</option>
+            <option>Furniture Installer</option>
+            <option>General Construction Worker</option>
+            <option>General Foreman</option>
+            <option>General Helper</option>
+            <option>General Labourer</option>
+            <option>Glass Installer</option>
+            <option>Gypsum Board Installer</option>
+            <option>Helper</option>
+            <option>Housekeeping Staff</option>
+            <option>Housekeeping Supervisor</option>
+            <option>HVAC Technician</option>
+            <option>Interior Carpenter</option>
+            <option>Interior Supervisor</option>
+            <option>JCB Operator</option>
+            <option>Loading and Unloading Worker</option>
+            <option>Machine Operator</option>
+            <option>Mason</option>
+            <option>Mason Helper</option>
+            <option>Material Coordinator</option>
+            <option>Material Handler</option>
+            <option>Mechanical Technician</option>
+            <option>MEP Supervisor</option>
+            <option>Modular Furniture Installer</option>
+            <option>Office Boy</option>
+            <option>Painter</option>
+            <option>Painter Helper</option>
+            <option>Partition Installer</option>
+            <option>Pipe Fitter</option>
+            <option>Planning Engineer</option>
+            <option>Plastering Worker</option>
+            <option>Plumber</option>
+            <option>Plumber Helper</option>
+            <option>Plumbing Helper</option>
+            <option>Plumbing Supervisor</option>
+            <option>Polishing Worker</option>
+            <option>POP Worker</option>
+            <option>Asst-Project Manager</option>
+            <option>Project Manager</option>
+            <option>Pump Operator</option>
+            <option>QA/QC Inspector</option>
+            <option>Quality Engineer</option>
+            <option>Quantity Surveyor</option>
+            <option>Safety Officer</option>
+            <option>Safety Steward</option>
+            <option>Safety Supervisor</option>
+            <option>Scaffolder</option>
+            <option>Scaffolding Helper</option>
+            <option>Security Guard</option>
+            <option>Security Supervisor</option>
+            <option>Shuttering Carpenter</option>
+            <option>Silicone Applicator</option>
+            <option>Site Administrator</option>
+            <option>Site Engineer</option>
+            <option>Site In-Charge</option>
+            <option>Site Supervisor</option>
+            <option>Steel Fixer</option>
+            <option>Storekeeper</option>
+            <option>Storekeeper-Helper</option>
+            <option>Surveyor</option>
+            <option>Tile Mason</option>
+            <option>Wallpaper Installer</option>
+            <option>Waterproofing Technician</option>
+            <option>Welder</option>
+            <option>Welder Helper</option>
+            <option>Welding Machine Operator</option>
+            <option>Wireman</option>
+            <option>Work Supervisor</option>
+            <option>Other's</option>
             </select>
           </div>
           <div class="form-group">
@@ -505,10 +1426,21 @@
           <div class="form-group">
             <label for="editContractorAgency">Contractor *</label>
             <select id="editContractorAgency" required>
-              <option>Bushra Interiors</option><option>Cholo Ram Jaat furniture</option><option>Dharmendra</option>
-              <option>Excellent Security Force</option><option>Limra</option><option>Lotus MEP Solution PVT LTD</option>
-              <option>MD Contracting</option><option>Pappu Ram</option><option>Rajesh Contact</option>
-              <option>Sree Vignesh</option><option>Stem Infra Project PVT LTD</option><option>Syncro Industries</option><option>Other's</option>
+              <option>Bushra Interiors</option>
+              <option>Cholo Ram Jaat furniture</option>
+              <option>Dharmendra</option>
+              <option>Henry & Farad Pvt.Ltd</option>
+              <option>Johnson controls</option>
+              <option>Limra</option>
+              <option>Lotus MEP Solution PVT LTD</option>
+              <option>MD Contracting</option>
+              <option>Pappu Ram</option>
+              <option>Rajesh Contact</option>
+              <option>Royalguardian Security</option>
+              <option>Sree Vignesh</option>
+              <option>Stem Infra Project PVT LTD</option>
+              <option>Syncro Industries</option>
+              <option>Other's</option>
             </select>
           </div>
         </div>
@@ -523,19 +1455,22 @@
             <strong>Aadhaar front</strong>
             <img alt="Aadhaar front preview" id="editFrontPreview" />
             <input accept="image/*" id="editFrontFile" type="file" />
-            <button class="small-btn secondary" onclick="clearEditImage('aadharFront')" type="button">Keep existing</button>
+            <button class="small-btn secondary" onclick="clearEditImage('aadharFront')" type="button">Keep
+              existing</button>
           </div>
           <div class="edit-image-card">
             <strong>Aadhaar back</strong>
             <img alt="Aadhaar back preview" id="editBackPreview" />
             <input accept="image/*" id="editBackFile" type="file" />
-            <button class="small-btn secondary" onclick="clearEditImage('aadharBack')" type="button">Keep existing</button>
+            <button class="small-btn secondary" onclick="clearEditImage('aadharBack')" type="button">Keep
+              existing</button>
           </div>
           <div class="edit-image-card">
             <strong>Worker photo</strong>
             <img alt="Worker photo preview" id="editPhotoPreview" />
             <input accept="image/*" id="editPhotoFile" type="file" />
-            <button class="small-btn secondary" onclick="clearEditImage('photoUpload')" type="button">Keep existing</button>
+            <button class="small-btn secondary" onclick="clearEditImage('photoUpload')" type="button">Keep
+              existing</button>
           </div>
         </div>
 
@@ -551,19 +1486,10 @@
   <script>
     'use strict';
 
-    /* =====================================================================
-       1. SETTINGS
-       Paste the "Web app URL" you get after deploying Code.gs.
-       (The admin username and password are now kept safely inside Code.gs.)
-       ===================================================================== */
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwrDkD4ZQV66Ba-YFNunVJH_qto8YsSnNIYp0uloiq_UKk9dQ2VRBP3uj6b7ZU3OczM/exec';
 
-    /* =====================================================================
-       2. TALKING TO THE BACKEND (Code.gs on Google Apps Script)
-       Every call sends JSON like { action: 'getAllWorkers', token: '...' }.
-       We send it as plain text so the browser does not need a CORS "preflight".
-       ===================================================================== */
-    let adminToken = '';   // given by the server after a successful login
+
+    let adminToken = '';
 
     async function api(action, payload) {
       if (!WEB_APP_URL || WEB_APP_URL.indexOf('PASTE_') === 0) {
@@ -592,9 +1518,7 @@
       return result;
     }
 
-    /* =====================================================================
-       3. "BACKEND" FUNCTIONS (same names as before, now they call Code.gs)
-       ===================================================================== */
+    //
     async function submitWorker(record) {
       const result = await api('submitWorker', { record: record });
       return { success: true, id: result.id };
@@ -1046,12 +1970,12 @@
 
       filteredRecords = cachedRecords.filter(record => {
         const searchable = [record.id, record.date, record.project, record.employeeName, record.dateOfBirth,
-          record.mobileNumber, record.emergencyContact, record.designation, record.supervisorContact,
-          record.contractorAgency, record.remarks].join(' ').toLowerCase();
+        record.mobileNumber, record.emergencyContact, record.designation, record.supervisorContact,
+        record.contractorAgency, record.remarks].join(' ').toLowerCase();
         return (!query || searchable.includes(query)) &&
-               (!project || record.project === project) &&
-               (!designation || record.designation === designation) &&
-               (!contractor || record.contractorAgency === contractor);
+          (!project || record.project === project) &&
+          (!designation || record.designation === designation) &&
+          (!contractor || record.contractorAgency === contractor);
       });
 
       filteredRecords.sort((a, b) => {
@@ -1121,8 +2045,8 @@
 
       // Plain text columns
       [formatTimestamp(record.date), record.project, record.employeeName, record.dateOfBirth,
-       record.mobileNumber, record.emergencyContact, record.designation, record.supervisorContact,
-       record.contractorAgency].forEach(value => {
+      record.mobileNumber, record.emergencyContact, record.designation, record.supervisorContact,
+      record.contractorAgency].forEach(value => {
         const td = document.createElement('td');
         td.textContent = value || '';
         tr.appendChild(td);
@@ -1404,7 +2328,7 @@
        ===================================================================== */
     const EDIT_IMAGES = {
       aadharFront: { preview: 'editFrontPreview', file: 'editFrontFile' },
-      aadharBack:  { preview: 'editBackPreview',  file: 'editBackFile' },
+      aadharBack: { preview: 'editBackPreview', file: 'editBackFile' },
       photoUpload: { preview: 'editPhotoPreview', file: 'editPhotoFile' }
     };
 
@@ -1420,7 +2344,7 @@
         if (editingRecord && editingRecord[key] === fileId && !preview.dataset.newImage && thumbCache[fileId]) {
           preview.src = thumbCache[fileId];
         }
-      }).catch(() => {});
+      }).catch(() => { });
     }
 
     function openEditModal(id) {
@@ -1525,4 +2449,5 @@
     window.addEventListener('beforeunload', closeCamera);
   </script>
 </body>
+
 </html>
