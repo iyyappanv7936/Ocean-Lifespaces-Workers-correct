@@ -1488,8 +1488,13 @@
 
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwrDkD4ZQV66Ba-YFNunVJH_qto8YsSnNIYp0uloiq_UKk9dQ2VRBP3uj6b7ZU3OczM/exec';
 
+<<<<<<< HEAD
 
     let adminToken = '';
+=======
+    
+    let adminToken = '';   
+>>>>>>> cd8373f7fc20c14df22f778306c8e5d7b5272d16
 
     async function api(action, payload) {
       if (!WEB_APP_URL || WEB_APP_URL.indexOf('PASTE_') === 0) {
@@ -1518,7 +1523,11 @@
       return result;
     }
 
+<<<<<<< HEAD
     //
+=======
+    //git
+>>>>>>> cd8373f7fc20c14df22f778306c8e5d7b5272d16
     async function submitWorker(record) {
       const result = await api('submitWorker', { record: record });
       return { success: true, id: result.id };
