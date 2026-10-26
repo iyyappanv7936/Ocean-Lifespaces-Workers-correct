@@ -947,6 +947,7 @@
             <option>Glass Installer</option>
             <option>Gypsum Board Installer</option>
             <option>Helper</option>
+            <option>Housekeeping Helper</option>
             <option>Housekeeping Staff</option>
             <option>Housekeeping Supervisor</option>
             <option>HVAC Technician</option>
@@ -1041,8 +1042,8 @@
         </div>
 
         <div class="form-group">
-          <label for="designation">State <span class="required">*</span></label>
-          <select id="designation" required>
+          <label for="state">State <span class="required">*</span></label>
+          <select id="state" required>
             <option value="">Choose</option>
             <option>Andhra Pradesh</option>
             <option>Arunachal Pradesh</option>
@@ -1085,13 +1086,13 @@
         </div> 
 
         <div class="form-group">
-          <label for="employeeName">Aadhar Address <span class="required">*</span></label>
-          <input autocomplete="address" id="address" maxlength="120" placeholder="Enter Your Aadhar Address" required />
+          <label for="aadharAddress">Aadhaar Address <span class="required">*</span></label>
+          <textarea autocomplete="street-address" id="aadharAddress" maxlength="500" placeholder="Enter the address printed on Aadhaar" required></textarea>
         </div>
 
         <div class="form-group">
-          <label for="employeeName">Aadhar Number <span class="required">*</span></label>
-          <input autocomplete="Aadhaar Number" id="Aadhaar Number" maxlength="120" placeholder="Enter Your Aadhar Number" required />
+          <label for="aadharNumber">Aadhaar Number <span class="required">*</span></label>
+          <input id="aadharNumber" inputmode="numeric" autocomplete="off" maxlength="12" pattern="[0-9]{12}" placeholder="Enter 12-digit Aadhaar number" required type="text" />
         </div>
 
       
@@ -1238,7 +1239,7 @@
       <div class="admin-tools">
         <div class="filter-row">
           <input aria-label="Search worker records" class="search-field" id="searchInput"
-            placeholder="Search name, mobile, ID, project, contractor…" type="search" />
+            placeholder="Search name, mobile, Aadhaar, state, address, project, contractor…" type="search" />
           <select aria-label="Filter by project" id="projectFilter">
             <option value="">All projects</option>
           </select>
@@ -1278,6 +1279,7 @@
         <table id="workersTable">
           <thead>
             <tr>
+              <th>S.No.</th>
               <th>Date</th>
               <th>Project</th>
               <th>Worker Name</th>
@@ -1287,9 +1289,9 @@
               <th>Designation</th>
               <th>Supervisor Contact</th>
               <th>Contractor</th>
-              <!-- <th>State</th>
-              <th>Aadhar Address</th>
-              <th>Aadhar number</th> -->
+              <th>State</th>
+              <th>Aadhaar Address</th>
+              <th>Aadhaar Number</th>
               <th>Aadhar Front</th>
               <th>Aadhar Back</th>
               <th>Worker Photo</th>
@@ -1299,7 +1301,7 @@
           </thead>
           <tbody id="dataTable">
             <tr>
-              <td class="no-data" colspan="14">Sign in to load records.</td>
+              <td class="no-data" colspan="17">Sign in to load records.</td>
             </tr>
           </tbody>
         </table>
@@ -1416,6 +1418,7 @@
             <option>Glass Installer</option>
             <option>Gypsum Board Installer</option>
             <option>Helper</option>
+            <option>Housekeeping Helper</option>
             <option>Housekeeping Staff</option>
             <option>Housekeeping Supervisor</option>
             <option>HVAC Technician</option>
@@ -1507,8 +1510,8 @@
         </div>
 
         <div class="form-group">
-          <label for="designation">State <span class="required">*</span></label>
-          <select id="designation" required>
+          <label for="editState">State <span class="required">*</span></label>
+          <select id="editState" required>
             <option value="">Choose</option>
             <option>Andhra Pradesh</option>
             <option>Arunachal Pradesh</option>
@@ -1552,13 +1555,13 @@
         
 
         <div class="form-group">
-          <label for="employeeName">Aadhar Address <span class="required">*</span></label>
-          <input autocomplete="address" id="address" maxlength="120" placeholder="Enter Your Aadhar Address" required />
+          <label for="editAadharAddress">Aadhaar Address <span class="required">*</span></label>
+          <textarea autocomplete="street-address" id="editAadharAddress" maxlength="500" placeholder="Enter the address printed on Aadhaar" required></textarea>
         </div>
 
         <div class="form-group">
-          <label for="employeeName">Aadhar Number <span class="required">*</span></label>
-          <input autocomplete="Aadhaar Number" id="Aadhaar Number" maxlength="120" placeholder="Enter Your Aadhar Number" required />
+          <label for="editAadharNumber">Aadhaar Number <span class="required">*</span></label>
+          <input id="editAadharNumber" inputmode="numeric" autocomplete="off" maxlength="12" pattern="[0-9]{12}" placeholder="Enter 12-digit Aadhaar number" required type="text" />
         </div>
 
         <div class="edit-images">
@@ -1889,6 +1892,9 @@
         designation: byId('designation').value,
         supervisorContact: byId('supervisorContact').value.trim(),
         contractorAgency: byId('contractorAgency').value,
+        state: byId('state').value,
+        aadharAddress: byId('aadharAddress').value.trim(),
+        aadharNumber: byId('aadharNumber').value.replace(/\D/g, ''),
         aadharFront: byId('aadharFront').value,
         aadharBack: byId('aadharBack').value,
         photoUpload: byId('photoUpload').value,
@@ -1898,8 +1904,9 @@
 
     // Returns an error text, or '' when everything is fine.
     function validateRecord(record, requireImages) {
-      const required = ['project', 'employeeName', 'dateOfBirth', 'mobileNumber', 'emergencyContact', 'designation', 'supervisorContact', 'contractorAgency'];
+      const required = ['project', 'employeeName', 'dateOfBirth', 'mobileNumber', 'emergencyContact', 'designation', 'supervisorContact', 'contractorAgency', 'state', 'aadharAddress', 'aadharNumber'];
       for (const key of required) if (!record[key]) return 'Please complete all required fields.';
+      if (!/^\d{12}$/.test(record.aadharNumber)) return 'Aadhaar number must contain exactly 12 digits.';
       for (const key of ['mobileNumber', 'emergencyContact', 'supervisorContact'])
         if (!/^\d{10}$/.test(record[key])) return 'Mobile, emergency and supervisor numbers must be exactly 10 digits.';
       if (record.dateOfBirth > dateKey(new Date())) return 'Date of birth cannot be in the future.';
@@ -2088,7 +2095,7 @@
       filteredRecords = cachedRecords.filter(record => {
         const searchable = [record.id, record.date, record.project, record.employeeName, record.dateOfBirth,
         record.mobileNumber, record.emergencyContact, record.designation, record.supervisorContact,
-        record.contractorAgency, record.remarks].join(' ').toLowerCase();
+        record.contractorAgency, record.state, record.aadharAddress, record.aadharNumber, record.remarks].join(' ').toLowerCase();
         return (!query || searchable.includes(query)) &&
           (!project || record.project === project) &&
           (!designation || record.designation === designation) &&
@@ -2135,13 +2142,13 @@
       if (!rows.length) {
         const tr = document.createElement('tr');
         const td = document.createElement('td');
-        td.colSpan = 14;
+        td.colSpan = 18;
         td.className = 'no-data';
         td.textContent = 'No worker records match these filters.';
         tr.appendChild(td);
         tbody.appendChild(tr);
       } else {
-        rows.forEach(record => tbody.appendChild(createRecordRow(record)));
+        rows.forEach((record, index) => tbody.appendChild(createRecordRow(record, start + index + 1)));
         loadVisibleThumbnails();   // fetch the small pictures for this page only
       }
 
@@ -2157,13 +2164,18 @@
       byId('pageNumbers').replaceChildren(label);
     }
 
-    function createRecordRow(record) {
+    function createRecordRow(record, serialNumber) {
       const tr = document.createElement('tr');
+
+      // Serial number follows the current filtered/sorted list and starts at 1.
+      const serialCell = document.createElement('td');
+      serialCell.textContent = String(serialNumber);
+      tr.appendChild(serialCell);
 
       // Plain text columns
       [formatTimestamp(record.date), record.project, record.employeeName, record.dateOfBirth,
       record.mobileNumber, record.emergencyContact, record.designation, record.supervisorContact,
-      record.contractorAgency].forEach(value => {
+      record.contractorAgency, record.state, record.aadharAddress, record.aadharNumber].forEach(value => {
         const td = document.createElement('td');
         td.textContent = value || '';
         tr.appendChild(td);
@@ -2348,6 +2360,7 @@
         const sheet = workbook.addWorksheet('Workers', { views: [{ state: 'frozen', ySplit: 1 }] });
 
         sheet.columns = [
+          { header: 'S.No.', key: 'serialNo', width: 10 },
           { header: 'Registration Date', key: 'date', width: 24 },
           { header: 'Project', key: 'project', width: 24 },
           { header: 'Worker Name', key: 'employeeName', width: 25 },
@@ -2357,6 +2370,9 @@
           { header: 'Designation', key: 'designation', width: 23 },
           { header: 'Supervisor Contact', key: 'supervisorContact', width: 22 },
           { header: 'Contractor Agency', key: 'contractorAgency', width: 30 },
+          { header: 'State', key: 'state', width: 22 },
+          { header: 'Aadhaar Address', key: 'aadharAddress', width: 42 },
+          { header: 'Aadhaar Number', key: 'aadharNumber', width: 20 },
           { header: 'Aadhaar Front', key: 'front', width: 19 },
           { header: 'Aadhaar Back', key: 'back', width: 19 },
           { header: 'Worker Photo', key: 'photo', width: 19 },
@@ -2373,18 +2389,20 @@
           const record = filteredRecords[index];
           const rowNumber = index + 2;
           sheet.addRow({
+            serialNo: index + 1,
             date: formatTimestamp(record.date), project: record.project, employeeName: record.employeeName,
             dateOfBirth: record.dateOfBirth, mobileNumber: String(record.mobileNumber || ''),
             emergencyContact: String(record.emergencyContact || ''), designation: record.designation,
             supervisorContact: String(record.supervisorContact || ''), contractorAgency: record.contractorAgency,
-            remarks: record.remarks
+            state: record.state || '', aadharAddress: record.aadharAddress || '',
+            aadharNumber: String(record.aadharNumber || ''), remarks: record.remarks
           });
           const row = sheet.getRow(rowNumber);
           row.height = 72;
           row.alignment = { vertical: 'middle', wrapText: true };
 
-          // Image columns are the 10th, 11th and 12th columns (zero-based 9, 10, 11).
-          for (const [key, col] of [['aadharFront', 9], ['aadharBack', 10], ['photoUpload', 11]]) {
+          // S.No. adds one column, so image columns are now 14, 15 and 16 (zero-based 13, 14, 15).
+          for (const [key, col] of [['aadharFront', 13], ['aadharBack', 14], ['photoUpload', 15]]) {
             if (!record[key]) continue;
             try {
               const parsed = dataUrlToBuffer(fullCache[record[key]]);
@@ -2396,7 +2414,7 @@
           }
         }
 
-        sheet.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: 13 } };
+        sheet.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: 17 } };
         const buffer = await workbook.xlsx.writeBuffer();
         downloadBlob(
           new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
@@ -2478,6 +2496,9 @@
       byId('editDesignation').value = record.designation || '';
       byId('editSupervisorContact').value = record.supervisorContact || '';
       byId('editContractorAgency').value = record.contractorAgency || '';
+      byId('editState').value = record.state || '';
+      byId('editAadharAddress').value = record.aadharAddress || '';
+      byId('editAadharNumber').value = record.aadharNumber || '';
       byId('editRemarks').value = record.remarks || '';
 
       // Show the current images and forget any new image from a previous edit.
@@ -2532,6 +2553,9 @@
         designation: byId('editDesignation').value,
         supervisorContact: byId('editSupervisorContact').value.trim(),
         contractorAgency: byId('editContractorAgency').value,
+        state: byId('editState').value,
+        aadharAddress: byId('editAadharAddress').value.trim(),
+        aadharNumber: byId('editAadharNumber').value.replace(/\D/g, ''),
         remarks: byId('editRemarks').value.trim()
       };
       const error = validateRecord(record, false);
