@@ -997,6 +997,7 @@
             <option>Steel Fixer</option>
             <option>Storekeeper</option>
             <option>Storekeeper-Helper</option>
+            <option>Supervisor</option>
             <option>Surveyor</option>
             <option>Tile Mason</option>
             <option>Wallpaper Installer</option>
@@ -1005,7 +1006,6 @@
             <option>Welder Helper</option>
             <option>Welding Machine Operator</option>
             <option>Wireman</option>
-            <option>Work Supervisor</option>
             <option>Other's</option>
           </select>
         </div>
@@ -1029,6 +1029,7 @@
             <option>Limra</option>
             <option>Lotus MEP Solution PVT LTD</option>
             <option>MD Contracting</option>
+            <option>Munu Dev Rabha</option>
             <option>Pappu Ram</option>
             <option>Rajesh Contact</option>
             <option>Royalguardian Security</option>
@@ -1081,8 +1082,7 @@
             <option>Puducherry (UT)</option>
             <option>other's</option>
           </select>
-        </div>
-        
+        </div> 
 
         <div class="form-group">
           <label for="employeeName">Aadhar Address <span class="required">*</span></label>
@@ -1287,6 +1287,9 @@
               <th>Designation</th>
               <th>Supervisor Contact</th>
               <th>Contractor</th>
+              <!-- <th>State</th>
+              <th>Aadhar Address</th>
+              <th>Aadhar number</th> -->
               <th>Aadhar Front</th>
               <th>Aadhar Back</th>
               <th>Worker Photo</th>
@@ -1463,6 +1466,7 @@
             <option>Steel Fixer</option>
             <option>Storekeeper</option>
             <option>Storekeeper-Helper</option>
+            <option>Supervisor</option>
             <option>Surveyor</option>
             <option>Tile Mason</option>
             <option>Wallpaper Installer</option>
@@ -1471,7 +1475,6 @@
             <option>Welder Helper</option>
             <option>Welding Machine Operator</option>
             <option>Wireman</option>
-            <option>Work Supervisor</option>
             <option>Other's</option>
             </select>
           </div>
@@ -1491,6 +1494,7 @@
               <option>Limra</option>
               <option>Lotus MEP Solution PVT LTD</option>
               <option>MD Contracting</option>
+              <option>Munu Dev Rabha</option>
               <option>Pappu Ram</option>
               <option>Rajesh Contact</option>
               <option>Royalguardian Security</option>
@@ -1500,11 +1504,6 @@
               <option>Other's</option>
             </select>
           </div>
-        </div>
-
-        <div class="form-group">
-          <label for="editRemarks">Remarks</label>
-          <textarea id="editRemarks" maxlength="1000"></textarea>
         </div>
 
         <div class="form-group">
@@ -1584,6 +1583,12 @@
             <button class="small-btn secondary" onclick="clearEditImage('photoUpload')" type="button">Keep
               existing</button>
           </div>
+
+          <div class="form-group">
+          <label for="editRemarks">Remarks</label>
+          <textarea id="editRemarks" maxlength="1000"></textarea>
+        </div>
+
         </div>
 
         <div class="modal-actions" style="margin-top:18px">
@@ -1884,10 +1889,10 @@
         designation: byId('designation').value,
         supervisorContact: byId('supervisorContact').value.trim(),
         contractorAgency: byId('contractorAgency').value,
-        remarks: byId('remarks').value.trim(),
         aadharFront: byId('aadharFront').value,
         aadharBack: byId('aadharBack').value,
-        photoUpload: byId('photoUpload').value
+        photoUpload: byId('photoUpload').value,
+        remarks: byId('remarks').value.trim()
       };
     }
 
